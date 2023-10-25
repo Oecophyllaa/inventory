@@ -1,9 +1,9 @@
 <?php
-require './env.php';
-require './models/Category.php';
+include_once 'env.php';
+include_once './models/ProductOutcome.php';
 
-$model = new Categories();
-$reports = $model->all();
+$model = new product_outcome();
+$datakeluar = $model->dataoutcome();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -14,7 +14,7 @@ $reports = $model->all();
   <meta name="description" content="Sufee Admin - HTML5 Admin Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jenis Produk | Admin</title>
+  <title>Produk Keluar | Admin</title>
 
   <!-- styles -->
   <?php include './includes/style.php'; ?>
@@ -24,20 +24,20 @@ $reports = $model->all();
 
 
   <!-- Left Panel -->
-  <?php include './includes/sidebar.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
   <!-- Left Panel -->
 
   <!-- Right Panel -->
   <div id="right-panel" class="right-panel">
     <!-- Header-->
-    <?php include './includes/header.php'; ?>
+    <?php include 'includes/header.php'; ?>
     <!-- Header-->
 
     <div class="breadcrumbs">
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Jenis Produk</h1>
+            <h1>Produk Keluar</h1>
           </div>
         </div>
       </div>
@@ -46,8 +46,8 @@ $reports = $model->all();
         <div class="page-header float-right">
           <div class="page-title">
             <ol class="breadcrumb text-right">
-              <li><a href="./index.php">Dashboard</a></li>
-              <li class="active">Jenis Produk</li>
+              <li><a href="index.php">Dashboard</a></li>
+              <li class="active">Produk Keluar</li>
             </ol>
           </div>
         </div>
@@ -68,18 +68,30 @@ $reports = $model->all();
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Nama</th>
-                      <th>Slug</th>
+                      <th>Tanggal Keluar</th>
+                      <th>No Invoice</th>
+                      <th>ID product</th>
+                      <th>Quantity</th>
+                      <th>Officer ID</th>
+                      <th>nama_produk</th>
+                      <th>Username</th>
+                      <th>Nama Petugas</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <?php $no = 1; ?>
-                    <?php foreach ($reports as $report) : ?>
+                    <?php foreach ($datakeluar as $out) : ?>
                       <tr>
                         <td><?= $no++; ?></td>
-                        <td><?= $report['name']; ?></td>
-                        <td><?= $report['slug']; ?></td>
+                        <td><?= $out['date']; ?></td>
+                        <td><?= $out['invoice_number']; ?></td>
+                        <td><?= $out['product_id']; ?></td>
+                        <td><?= $out['qty']; ?></td>
+                        <td><?= $out['officer_id']; ?></td>
+                        <td><?= $out['nama_produk']; ?></td>
+                        <td><?= $out['username']; ?></td>
+                        <td><?= $out['nama_petugas']; ?></td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -96,7 +108,7 @@ $reports = $model->all();
   <!-- Right Panel -->
 
   <!-- scripts -->
-  <?php include './includes/script.php'; ?>
+  <?php include 'includes/script.php'; ?>
 </body>
 
 </html>

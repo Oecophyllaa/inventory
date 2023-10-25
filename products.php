@@ -1,8 +1,8 @@
 <?php
 require './env.php';
-require './models/Category.php';
+require './models/Product.php';
 
-$model = new Categories();
+$model = new Products();
 $reports = $model->all();
 ?>
 <!doctype html>
@@ -14,7 +14,7 @@ $reports = $model->all();
   <meta name="description" content="Sufee Admin - HTML5 Admin Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jenis Produk | Admin</title>
+  <title>Produk | Admin</title>
 
   <!-- styles -->
   <?php include './includes/style.php'; ?>
@@ -37,7 +37,7 @@ $reports = $model->all();
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Jenis Produk</h1>
+            <h1>Produk </h1>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ $reports = $model->all();
           <div class="page-title">
             <ol class="breadcrumb text-right">
               <li><a href="./index.php">Dashboard</a></li>
-              <li class="active">Jenis Produk</li>
+              <li class="active">Produk </li>
             </ol>
           </div>
         </div>
@@ -68,18 +68,23 @@ $reports = $model->all();
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Nama</th>
-                      <th>Slug</th>
+                      <th>Kode</th>
+                      <th>Nama Produk</th>
+                      <th>Stock</th>
+                      <th>Kategori</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <?php $no = 1; ?>
-                    <?php foreach ($reports as $report) : ?>
+                    <?php foreach ($reports as $r) : ?>
                       <tr>
                         <td><?= $no++; ?></td>
-                        <td><?= $report['name']; ?></td>
-                        <td><?= $report['slug']; ?></td>
+                        <td><?= $r['code']; ?></td>
+                        <td><?= $r['name']; ?></td>
+                        <td><?= $r['stok']; ?></td>
+                        <td><?= $r['category']; ?></td>
+
                       </tr>
                     <?php endforeach; ?>
                   </tbody>

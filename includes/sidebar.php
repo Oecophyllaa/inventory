@@ -17,17 +17,17 @@
 
         <h3 class="menu-title">Tabel Master</h3><!-- /.menu-title -->
         <li class="">
-          <a href="#"> <i class="menu-icon fa fa-bars"></i>Jenis Produk </a>
+          <a href="../categories.php"> <i class="menu-icon fa fa-bars"></i>Jenis Produk </a>
         </li>
         <li class="">
-          <a href="#"> <i class="menu-icon fa fa-bars"></i>Supplier </a>
+          <a href="../suppliers.php"> <i class="menu-icon fa fa-bars"></i>Supplier </a>
         </li>
 
         <h3 class="menu-title">Tabel Relasi</h3><!-- /.menu-title -->
         <li>
-          <a href="#"> <i class="menu-icon ti-list"></i>Produk </a>
+          <a href="../products.php"> <i class="menu-icon ti-list"></i>Produk </a>
           <a href="../product_income.php"> <i class="menu-icon ti-list"></i>Produk Masuk </a>
-          <a href="#"> <i class="menu-icon ti-list"></i>Produk Keluar </a>
+          <a href="../product_outcome.php"> <i class="menu-icon ti-list"></i>Produk Keluar </a>
         </li>
 
         <h3 class="menu-title">Laporan</h3><!-- /.menu-title -->
