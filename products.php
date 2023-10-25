@@ -59,6 +59,9 @@ $reports = $model->all();
         <div class="row">
 
           <div class="col-md-12">
+          <a href="./product_tambah.php" class="btn btn-primary">
+              <i class="fa fa-plus"></i>&nbsp; Tambah Data
+            </a>
             <div class="card">
               <div class="card-header">
                 <strong class="card-title">Data Table</strong>
@@ -72,6 +75,7 @@ $reports = $model->all();
                       <th>Nama Produk</th>
                       <th>Stock</th>
                       <th>Kategori</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
 
@@ -84,7 +88,11 @@ $reports = $model->all();
                         <td><?= $r['name']; ?></td>
                         <td><?= $r['stok']; ?></td>
                         <td><?= $r['category']; ?></td>
-
+                        <td>
+                          <a href="./product_detail.php?id=<?= $r['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
