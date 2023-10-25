@@ -6,7 +6,7 @@ require './models/Supplier.php';
 require './models/User.php';
 
 $productObj = new Products();
-$supplierObj = new Suppliers();
+$supplierObj = new Supplier();
 $userObj = new User();
 $products = $productObj->all();
 $suppliers = $supplierObj->all();
@@ -72,7 +72,7 @@ $users = $userObj->all();
                 <form action="./product_income_controller.php" method="POST">
                   <div class="form-group">
                     <label for="date" class="form-control-label">Tangal Masuk</label>
-                    <input type="date" name="date" id="date" placeholder="masukkan tanggal masuk produk" class="form-control" required />
+                    <input type="text" name="date" id="date" placeholder="masukkan tanggal masuk produk" class="form-control" required />
                   </div>
 
                   <div class="form-group">

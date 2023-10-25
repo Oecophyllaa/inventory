@@ -20,7 +20,7 @@
           <a href="./categories.php"> <i class="menu-icon fa fa-bars"></i>Jenis Produk </a>
         </li>
         <li class="">
-          <a href="./suppliers.php"> <i class="menu-icon fa fa-bars"></i>Supplier </a>
+          <a href="./suppliers.php"> <i class="menu-icon fa fa-bars"></i>Suppliers </a>
         </li>
 
         <h3 class="menu-title">Tabel Relasi</h3><!-- /.menu-title -->
