@@ -18,4 +18,22 @@ class ProductIncome
 
     return $res;
   }
+
+  public function find($id)
+  {
+    $sql = "SELECT pi.*, p.name AS nama_produk, s.name AS nama_supplier, u.username, du.name AS nama_petugas FROM (((product_income pi INNER JOIN products p ON pi.product_id = p.id) INNER JOIN suppliers s ON pi.supplier_id = s.id) INNER JOIN users u ON pi.officer_id = u.id INNER JOIN detail_user du ON du.users_id = u.id) WHERE pi.id=?;";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute([$id]);
+    $res = $ps->fetch();
+
+    return $res;
+  }
+
+  public function store($data)
+  {
+    $sql = "INSERT INTO product_income (date, invoice_number, product_id, supplier_id, qty, officer_id) VALUES 
+      (?, ?, ?, ?, ?, ?);";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
 }
