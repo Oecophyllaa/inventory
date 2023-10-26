@@ -63,7 +63,7 @@ $reports = $model->all();
               <i class="fa fa-plus"></i>&nbsp; Tambah Data
             </a>
 
-            <div class="card mt-3">
+            <div class="card mt-2">
               <div class="card-header">
                 <strong class="card-title">Data Table</strong>
               </div>
