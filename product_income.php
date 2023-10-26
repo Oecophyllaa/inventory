@@ -94,9 +94,20 @@ $reports = $model->all();
                         <td><?= $report['qty']; ?></td>
                         <td><?= $report['nama_petugas']; ?></td>
                         <td>
-                          <a href="./product_income_show.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
+                          <a href="./product_income_show.php?id=<?= $report['id']; ?>" class="btn btn-info btn-sm" title="detail">
                             <i class="fa fa-eye"></i>
                           </a>
+
+                          <a href="./product_income_edit.php?id=<?= $report['id']; ?>" class="btn btn-warning btn-sm" title="edit">
+                            <i class="fa fa-edit"></i>
+                          </a>
+
+                          <form action="./product_income_controller.php" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="<?= $report['id']; ?>" />
+                            <button type="submit" name="proses" value="delete" class="btn btn-danger btn-sm" onclick="return confirm('data dihapus permanen?');" title="delete">
+                              <i class="fa fa-trash-o"></i>
+                            </button>
+                          </form>
                         </td>
                       </tr>
                     <?php endforeach; ?>
