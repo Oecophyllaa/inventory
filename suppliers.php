@@ -2,7 +2,7 @@
 require './env.php';
 require './models/Supplier.php';
 
-$model = new Suppliers();
+$model = new Supplier();
 $reports = $model->all();
 ?>
 <!doctype html>
@@ -57,42 +57,58 @@ $reports = $model->all();
     <div class="content mt-3">
       <div class="animated fadeIn">
         <div class="row">
-
+          
           <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <strong class="card-title">Data Table</strong>
-              </div>
-              <div class="card-body">
-                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Address</th>
-                      <th>Contect Number</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php $no = 1; ?>
-                    <?php foreach ($reports as $sup) : ?>
+              <a href="./suppliers_create.php" class="btn btn-primary">
+                <i class="fa fa-plus"></i>&nbsp; Tambah Supplier
+              </a>
+          
+              <div class="card">
+                <div class="card-header">
+                  <strong class="card-title">Data Table</strong>
+                </div>
+                <div class="card-body">
+                  <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                    <thead>
                       <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $sup['name']; ?></td>
-                        <td><?= $sup['email']; ?></td>
-                        <td><?= $sup['address']; ?></td>
-                        <td><?= $sup['contact_number']; ?></td>
+                        <th>No</th>
+                        <th>Nama Supplier</th>
+                        <th>Email</th>
+                        <th>Alamat</th>
+                        <th>No Telepon</th>
+                        <th>Aksi</th>
                       </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+                    </thead>
 
+                    <tbody>
+                      <?php $no = 1; ?>
+                      <?php foreach ($reports as $sup) : ?>
+                        <tr>
+                          <td><?= $no++; ?></td>
+                          <td><?= $sup['name']; ?></td>
+                          <td><?= $sup['email']; ?></td>
+                          <td><?= $sup['address']; ?></td>
+                          <td><?= $sup['contact_number']; ?></td>
+                          <td>
+                            <a href="./suppliers_show.php?id=<?= $sup['id']; ?>" class="btn btn-primary btn-sm">
+                              <i class="fa fa-eye"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+          </div>
         </div>
+
+            
+
+          </div>
+        
+
       </div><!-- .animated -->
 
     </div> <!-- .content -->
