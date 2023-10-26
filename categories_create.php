@@ -2,9 +2,10 @@
 require './env.php';
 require './models/Category.php';
 
-$model = new Categories();
-$reports = $model->all();
+$categoriesObj = new Categories();
+$categories = $categoriesObj->all();
 ?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -37,7 +38,7 @@ $reports = $model->all();
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Jenis Produk</h1>
+            <h1>Tambah Data Jenis Produk</h1>
           </div>
         </div>
       </div>
@@ -58,43 +59,26 @@ $reports = $model->all();
       <div class="animated fadeIn">
         <div class="row">
 
-        <div class="col-md-12">
-            <a href="./categories_create.php" class="btn btn-primary">
-              <i class="fa fa-plus"></i>&nbsp; Tambah Data
-            </a>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body card-block">
+                <form action="./categories_controller.php" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-control-label">Nama Kategori</label>
+                        <input type="text" name="name" id="name" placeholder="Masukan Jenis Produk" class="form-control" required />
+                    </div>
 
-            <div class="card mt-3">
-              <div class="card-header">
-                <strong class="card-title">Data Table</strong>
+                    <div class="form-group">
+                        <label for="slug" class="form-control-label">Slug</label>
+                         <input type="text" name="slug" id="slug" placeholder="Masukan Slug"  class="form-control" required />
+                    </div>
+                    
+                  <button name="proses" value="simpan" type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i>&nbsp; Simpan
+                  </button>
+                </form>
               </div>
-              <div class="card-body">
-                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Nama Kategori</th>
-                      <th>Slug</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    <?php $no = 1; ?>
-                    <?php foreach ($reports as $report) : ?>
-                      <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $report['name']; ?></td>
-                        <td><?= $report['slug']; ?></td>
-                        <td>
-                          <a href="./categories_show.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
 
