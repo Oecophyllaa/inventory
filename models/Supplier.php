@@ -31,8 +31,10 @@ class Supplier
 
   public function store($data)
   {
-    $sql = "INSERT INTO suppliers (nama_supplier, email, alamat, contact_number) VALUES 
-      (?, ?, ?, ?);";
+    // $sql = "INSERT INTO suppliers (nama_supplier, email, alamat, contact_number) VALUES 
+    //   (?, ?, ?, ?);";
+    $sql = "INSERT INTO suppliers (name, email, address, contact_number) VALUES (?, ?, ?, ?);";
+
     $ps = $this->env->prepare($sql);
     $ps->execute($data);
   }
