@@ -36,4 +36,14 @@ class product_outcome
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
   }
+  public function ubah($data){
+    $sql = "UPDATE product_outcome SET date=?, invoice_number=?, product_id=?, qty=?, officer_id=? WHERE id =?";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
+  public function hapus($data){
+    $sql = "DELETE FROM product_outcome WHERE id=?";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+ }
 }

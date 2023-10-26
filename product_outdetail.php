@@ -40,7 +40,7 @@ $data = $model->get($id);
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Detail Produk Keluar > <strong><?= $data['id']; ?></strong></h1>
+            <h1>Detail Produk Keluar ke <strong><?= $data['id']; ?></strong></h1>
           </div>
         </div>
       </div>
@@ -91,13 +91,8 @@ $data = $model->get($id);
 
 
                 <div class="form-group">
-                  <label for="product_id" class="form-control-label">Nama Produk</label>
-                  <select name="product_id" id="product_id" class="form-control">
-                    <option>Pilih Produk</option>
-                    <?php foreach ($products as $product) : ?>
-                      <option value="<?= $product['id']; ?>"><?= $product['name']; ?></option>
-                    <?php endforeach; ?>
-                  </select>
+                  <label for="date" class="form-control-label">Produk id</label>
+                  <input type="text" id="product_id" value="<?= $data['product_id']; ?>" class="form-control" readonly />
                 </div>
 
 
