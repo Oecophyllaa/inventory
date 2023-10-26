@@ -18,4 +18,22 @@ class Categories
 
     return $res;
   }
+
+  public function find($id)
+  {
+    $sql = "SELECT * FROM categories WHERE categories.id=?;";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute([$id]);
+    $res = $ps->fetch();
+
+    return $res;
+  }
+
+  public function store($data)
+  {
+    $sql = "INSERT INTO categories (name, slug) VALUES 
+      (?, ?);";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
 }

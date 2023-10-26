@@ -2,9 +2,11 @@
 require './env.php';
 require './models/Category.php';
 
+$id = $_REQUEST['id'];
 $model = new Categories();
-$reports = $model->all();
+$data = $model->find($id);
 ?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -37,7 +39,7 @@ $reports = $model->all();
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Jenis Produk</h1>
+            <h1>Detail Jenis Produk > <strong><?= $data['id']; ?></strong></h1>
           </div>
         </div>
       </div>
@@ -58,44 +60,22 @@ $reports = $model->all();
       <div class="animated fadeIn">
         <div class="row">
 
-        <div class="col-md-12">
-            <a href="./categories_create.php" class="btn btn-primary">
-              <i class="fa fa-plus"></i>&nbsp; Tambah Data
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body card-block">
+                <div class="form-group">
+                  <label for="name" class="form-control-label">Nama Kategori</label>
+                  <input type="text" id="name" value="<?= $data['name']; ?>" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label for="slug" class="form-control-label">Slug</label>
+                  <input type="text" id="slug" value="<?= $data['slug']; ?>" class="form-control" readonly />
+                </div>
+
+            <a href="./categories.php" class="btn btn-primary">
+              <i class="fa fa-mail-reply"></i>&nbsp; Kembali
             </a>
-
-            <div class="card mt-3">
-              <div class="card-header">
-                <strong class="card-title">Data Table</strong>
-              </div>
-              <div class="card-body">
-                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Nama Kategori</th>
-                      <th>Slug</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php $no = 1; ?>
-                    <?php foreach ($reports as $report) : ?>
-                      <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $report['name']; ?></td>
-                        <td><?= $report['slug']; ?></td>
-                        <td>
-                          <a href="./categories_show.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
 
         </div>
