@@ -90,9 +90,17 @@ $reports = $model->all();
                           <td><?= $sup['address']; ?></td>
                           <td><?= $sup['contact_number']; ?></td>
                           <td>
+                          <form action="suppliers_controller.php" method="POST">
                             <a href="./suppliers_show.php?id=<?= $sup['id']; ?>" class="btn btn-primary btn-sm">
                               <i class="fa fa-eye"></i>
                             </a>
+                            <a href="./suppliers_create.php?idedit=<?= $sup['id']?>" class="btn btn-danger btn-sm">
+                            <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="submit" class="btn btn-warning btn-sm" name="proses" value="hapus" 
+                            onclick="return confirm('anda Yakin akan menghapus')" ><i class="fa fa-trash-o"></i></button>
+                            <input type="hidden" name="idx" value="<?= $sup['id']?> ">
+                        </form>
                           </td>
                         </tr>
                       <?php endforeach; ?>
