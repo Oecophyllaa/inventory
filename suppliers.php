@@ -21,8 +21,6 @@ $reports = $model->all();
 </head>
 
 <body>
-
-
   <!-- Left Panel -->
   <?php include './includes/sidebar.php'; ?>
   <!-- Left Panel -->
@@ -57,69 +55,61 @@ $reports = $model->all();
     <div class="content mt-3">
       <div class="animated fadeIn">
         <div class="row">
-          
-          <div class="col-md-12">
-              <a href="./suppliers_create.php" class="btn btn-primary">
-                <i class="fa fa-plus"></i>&nbsp; Tambah Supplier
-              </a>
-          
-              <div class="card">
-                <div class="card-header">
-                  <strong class="card-title">Data Table</strong>
-                </div>
-                <div class="card-body">
-                  <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama Supplier</th>
-                        <th>Email</th>
-                        <th>Alamat</th>
-                        <th>No Telepon</th>
-                        <th>Aksi</th>
-                      </tr>
-                    </thead>
 
-                    <tbody>
-                      <?php $no = 1; ?>
-                      <?php foreach ($reports as $sup) : ?>
-                        <tr>
-                          <td><?= $no++; ?></td>
-                          <td><?= $sup['name']; ?></td>
-                          <td><?= $sup['email']; ?></td>
-                          <td><?= $sup['address']; ?></td>
-                          <td><?= $sup['contact_number']; ?></td>
-                          <td>
-                          <form action="suppliers_controller.php" method="POST">
-                            <a href="./suppliers_show.php?id=<?= $sup['id']; ?>" class="btn btn-primary btn-sm">
-                              <i class="fa fa-eye"></i>
-                            </a>
-                            <a href="./suppliers_create.php?idedit=<?= $sup['id']?>" class="btn btn-danger btn-sm">
-                            <i class="fa fa-edit"></i>
-                            </a>
-                            <button type="submit" class="btn btn-warning btn-sm" name="proses" value="hapus" 
-                            onclick="return confirm('anda Yakin akan menghapus')" ><i class="fa fa-trash-o"></i></button>
-                            <input type="hidden" name="idx" value="<?= $sup['id']?> ">
-                        </form>
-                          </td>
-                        </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
-                </div>
+          <div class="col-md-12">
+            <a href="./suppliers_create.php" class="btn btn-primary">
+              <i class="fa fa-plus"></i>&nbsp; Tambah Supplier
+            </a>
+
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title">Data Table</strong>
               </div>
-              
+              <div class="card-body">
+                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Supplier</th>
+                      <th>Email</th>
+                      <th>Alamat</th>
+                      <th>No Telepon</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <?php $no = 1; ?>
+                    <?php foreach ($reports as $sup) : ?>
+                      <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $sup['name']; ?></td>
+                        <td><?= $sup['email']; ?></td>
+                        <td><?= $sup['address']; ?></td>
+                        <td><?= $sup['contact_number']; ?></td>
+                        <td>
+                          <a href="./suppliers_show.php?id=<?= $sup['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
+                          </a>
+
+                          <a href="./suppliers_create.php?idedit=<?= $sup['id'] ?>" class="btn btn-danger btn-sm">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+
           </div>
         </div>
+      </div>
+    </div><!-- .animated -->
 
-            
-
-          </div>
-        
-
-      </div><!-- .animated -->
-
-    </div> <!-- .content -->
+  </div> <!-- .content -->
   </div>
   <!-- Right Panel -->
 

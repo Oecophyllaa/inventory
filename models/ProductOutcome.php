@@ -21,7 +21,7 @@ class product_outcome
 
   public function get($id)
   {
-    $sql = "SELECT pi.*, p.name AS nama_produk, u.username, du.name AS nama_petugas FROM product_outcome pi INNER JOIN products p ON pi.product_id = p.id INNER JOIN users u ON pi.officer_id = u.id INNER JOIN detail_user du ON u.id = du.users_id WHERE pi.id=?;";
+    $sql = "SELECT pi.*, p.name AS nama_produk, u.username, du.name AS nama_petugas FROM product_outcome pi INNER JOIN products p ON pi.product_id = p.id INNER JOIN users u ON pi.officer_id = u.id INNER JOIN detail_user du ON u.id = du.users_id WHERE pi.id=? ;";
     $ps = $this->conn->prepare($sql);
     $ps->execute([$id]);
     $res = $ps->fetch();
@@ -36,14 +36,16 @@ class product_outcome
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
   }
-  public function ubah($data){
+  public function ubah($data)
+  {
     $sql = "UPDATE product_outcome SET date=?, invoice_number=?, product_id=?, qty=?, officer_id=? WHERE id =?";
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
   }
-  public function hapus($data){
+  public function hapus($data)
+  {
     $sql = "DELETE FROM product_outcome WHERE id=?";
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
- }
+  }
 }

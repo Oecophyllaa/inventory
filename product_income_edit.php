@@ -93,7 +93,7 @@ $users = $userObj->all();
                       <option>Pilih Produk</option>
                       <?php foreach ($products as $product) : ?>
                         <option value="<?= $product['id']; ?>" <?= $product['id'] == $income['product_id'] ? 'selected' : ''; ?>>
-                          <?= $product['name']; ?>
+                          <?= $product['nama']; ?>
                         </option>
                       <?php endforeach; ?>
                     </select>

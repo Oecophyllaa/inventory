@@ -5,12 +5,11 @@ require './models/Category.php';
 $categoriesObj = new Categories();
 $categories = $categoriesObj->all();
 
-$idedit = $_REQUEST ['idedit'];
-$obj_categories = new Categories();
-if (!empty($idedit)){
-  $categorie = $obj_categories->find($idedit);
+$idedit = isset($_GET['idedit']) ? $_REQUEST['idedit'] : null;
+if (!empty($idedit)) {
+  $category = $categoriesObj->find($idedit);
 } else {
-  $categorie = array();
+  $category = array();
 }
 ?>
 
@@ -46,7 +45,7 @@ if (!empty($idedit)){
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Tambah Data Jenis Produk</h1>
+            <h1><?= $idedit == null ? 'Tambah Data' : 'Update Data'; ?> Jenis Produk</h1>
           </div>
         </div>
       </div>
@@ -71,27 +70,28 @@ if (!empty($idedit)){
             <div class="card">
               <div class="card-body card-block">
                 <form action="./categories_controller.php" method="POST">
-                    <div class="form-group">
-                        <label for="name" class="form-control-label">Nama Kategori</label>
-                        <input type="text" name="name" id="name" placeholder="Masukan Jenis Produk" class="form-control" required />
-                    </div>
+                  <div class="form-group">
+                    <label for="name" class="form-control-label">Nama Kategori</label>
+                    <?php if (empty($idedit)) : ?>
+                      <input type="text" name="name" id="name" placeholder="Masukan Jenis Produk" class="form-control" required />
+                    <?php else : ?>
+                      <input type="text" name="name" id="name" value="<?= $category['name']; ?>" class="form-control" required />
+                    <?php endif ?>
+                  </div>
 
-                    <div class="form-group">
-                        <label for="slug" class="form-control-label">Slug</label>
-                         <input type="text" name="slug" id="slug" placeholder="Masukan Slug"  class="form-control" required />
-                    </div>
-                  
-                    <?php
-                  if(empty($idedit)){ ?>
+                  <div class="form-group">
+                    <label for="slug" class="form-control-label">Slug</label>
+                    <input type="text" name="slug" id="slug" <?= empty($idedit) ? 'placeholder="Masukan Slug"' : 'value="' . $category['slug'] . '"'; ?> class="form-control" required />
+                  </div>
+
+                  <?php if (!empty($idedit)) : ?>
+                    <input type="hidden" name="idx" value="<?= $idedit; ?>" />
+                    <button name="proses" value="ubah" type="submit" class="btn btn-warning">Ubah</button>
+                  <?php else : ?>
                     <button name="proses" value="simpan" type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i>&nbsp; Simpan
-                  </button>
-                  <?php } else {
-                      ?>
-                 <button type="submit" name="proses" value="ubah" class="btn btn-warning">Ubah</button>
-                    <?php } ?>
-                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
-
+                      <i class="fa fa-save"></i>&nbsp; Simpan
+                    </button>
+                  <?php endif; ?>
                 </form>
               </div>
 

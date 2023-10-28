@@ -1,15 +1,12 @@
 <?php
-$dsn = 'mysql:dbname=db_iventory;host=localhost';
+$dsn = 'mysql:dbname=inventory;host=localhost';
 $user = 'root';
 $password = '';
 
-try{
+try {
     $dbh = new PDO($dsn, $user, $password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo "Sukses Koneksi : ".$user;
-} catch (PDOException $e){
-    echo "Koneksi Gagal" .$e->getMessage();
+} catch (PDOException $e) {
+    echo "Koneksi Gagal" . $e->getMessage();
 }
-
-
-?>

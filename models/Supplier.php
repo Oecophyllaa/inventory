@@ -21,7 +21,7 @@ class Supplier
 
   public function find($id)
   {
-    $sql = "SELECT s.id, s.name AS nama_supplier, s.email, s.address as alamat, s.contact_number, pi.*, p.name AS nama_produk, u.username, du.name AS nama_petugas FROM suppliers s INNER JOIN product_income pi ON pi.supplier_id = s.id INNER JOIN products p ON pi.product_id = p.id INNER JOIN users u ON pi.officer_id = u.id INNER JOIN detail_user du ON u.id = du.users_id WHERE s.id = ?";
+    $sql = "SELECT * FROM suppliers WHERE id=? ;";
     $ps = $this->conn->prepare($sql);
     $ps->execute([$id]);
     $res = $ps->fetch();
@@ -38,15 +38,17 @@ class Supplier
     $ps->execute($data);
   }
 
-  public function ubah($data){
+  public function ubah($data)
+  {
     $sql = "UPDATE suppliers SET  name=?, email= ?, address=?, contact_number=? WHERE id=?";
-     $ps = $this->conn->prepare($sql);
-     $ps->execute($data);
- }
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
 
- public function hapus($data){
+  public function hapus($data)
+  {
     $sql = "DELETE FROM suppliers WHERE id=?";
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
- }
+  }
 }

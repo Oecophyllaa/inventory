@@ -5,10 +5,9 @@ require './models/Supplier.php';
 $supplierObj = new Supplier();
 $suppliers = $supplierObj->all();
 
-$idedit = $_REQUEST ['idedit'];
-$obj_supplier = new Supplier();
-if (!empty($idedit)){
-  $supplier = $obj_supplier->find($idedit);
+$idedit = isset($_GET['idedit']) ? $_REQUEST['idedit'] : null;
+if (!empty($idedit)) {
+  $supplier = $supplierObj->find($idedit);
 } else {
   $supplier = array();
 }
@@ -46,7 +45,7 @@ if (!empty($idedit)){
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Tambah Data Supplier</h1>
+            <h1><?= empty($idedit) ? 'Tambah Data' : 'Update Data'; ?> Supplier</h1>
           </div>
         </div>
       </div>
@@ -73,33 +72,48 @@ if (!empty($idedit)){
                 <form action="./suppliers_controller.php" method="POST">
                   <div class="form-group">
                     <label for="nama_supplier" class="form-control-label">Nama Suppliers</label>
-                    <input type="text" name="nama_supplier" id="nama_supplier" placeholder="masukkan nama supplier" class="form-control" value="<?= $supplier['nama_supplier'] ?>" >                  </div>
+                    <?php if (empty($idedit)) : ?>
+                      <input type="text" name="nama_supplier" id="nama_supplier" placeholder="masukkan nama supplier" class="form-control" required />
+                    <?php else : ?>
+                      <input type="text" name="nama_supplier" id="nama_supplier" value="<?= $supplier['name'] ?>" class="form-control" required />
+                    <?php endif; ?>
+                  </div>
 
                   <div class="form-group">
                     <label for="email" class="form-control-label">Email</label>
-                    <input type="text" name="email" id="email" placeholder="masukkan email" class="form-control" value="<?= $supplier['email'] ?> " >
+                    <?php if (empty($idedit)) : ?>
+                      <input type="text" name="email" id="email" placeholder="masukkan email" class="form-control" required />
+                    <?php else : ?>
+                      <input type="text" name="email" id="email" value="<?= $supplier['email'] ?>" class="form-control" required />
+                    <?php endif; ?>
                   </div>
 
                   <div class="form-group">
                     <label for="alamat" class="form-control-label">Alamat</label>
-                    <input type="text" name="alamat" id="alamat" placeholder="masukkan alamat" class="form-control" value="<?= $supplier['alamat'] ?> " >
+                    <?php if (empty($idedit)) : ?>
+                      <input type="text" name="alamat" id="alamat" placeholder="masukkan alamat" class="form-control" required />
+                    <?php else : ?>
+                      <input type="text" name="alamat" id="alamat" value="<?= $supplier['address'] ?>" class="form-control" required />
+                    <?php endif; ?>
                   </div>
 
                   <div class="form-group">
                     <label for="contact_number" class="form-control-label">No Telepon</label>
-                    <input type="text" name="contact_number" id="contact_number" placeholder="masukkan no telepon" class="form-control" value="<?= $supplier['contact_number'] ?>" >
+                    <?php if (empty($idedit)) :  ?>
+                      <input type="text" name="contact_number" id="contact_number" placeholder="masukkan no telepon" class="form-control" required />
+                    <?php else : ?>
+                      <input type="text" name="contact_number" id="contact_number" value="<?= $supplier['contact_number'] ?>" class="form-control" required />
+                    <?php endif; ?>
                   </div>
 
-                  <?php
-                  if(empty($idedit)){ ?>
+                  <?php if (empty($idedit)) : ?>
                     <button name="proses" value="simpan" type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i>&nbsp; Simpan
-                  </button>
-                  <?php } else {
-                      ?>
-                 <button type="submit" name="proses" value="ubah" class="btn btn-warning">Ubah</button>
-                    <?php } ?>
-                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
+                      <i class="fa fa-save"></i>&nbsp; Simpan
+                    </button>
+                  <?php else : ?>
+                    <input type="hidden" name="idx" value="<?= $idedit; ?>">
+                    <button type="submit" name="proses" value="ubah" class="btn btn-warning">Ubah</button>
+                  <?php endif; ?>
 
                 </form>
               </div>
