@@ -86,11 +86,12 @@ $reports = $model->all();
                         <td><?= $report['name']; ?></td>
                         <td><?= $report['slug']; ?></td>
                         <td>
-                        <form action="suppliers_controller.php" method="POST">
+                        <form action="categories_controller.php" method="POST">
                             <a href="./categories_show.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
                             <i class="fa fa-eye"></i>
-                            <a href="./categories_create.php?= $report['id']?>" class="btn btn-danger btn-sm">
-                            <i class="fa fa-edit"></i>
+                            
+                            <a href="./categories_create.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
                         </form>
                         </td>
                       </tr>
