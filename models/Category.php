@@ -36,4 +36,10 @@ class Categories
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
   }
+
+  public function ubah($data){
+    $sql = "UPDATE categories SET  name=?, slug=? WHERE id=?";
+     $ps = $this->conn->prepare($sql);
+     $ps->execute($data);
+ }
 }
