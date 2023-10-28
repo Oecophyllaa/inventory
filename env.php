@@ -1,13 +1,15 @@
 <?php
-// $dsn = 'mysql:dbname=inventori;host=localhost';
-$dsn = 'mysql:dbname=inventory;host=localhost';
+$dsn = 'mysql:dbname=db_iventory;host=localhost';
 $user = 'root';
 $password = '';
 
-try {
-  $dbh = new PDO($dsn, $user, $password);
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  // echo 'Database Connected!';
-} catch (PDOException $e) {
-  echo 'Connection Error, ' . $e->getMessage();
+try{
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "Sukses Koneksi : ".$user;
+} catch (PDOException $e){
+    echo "Koneksi Gagal" .$e->getMessage();
 }
+
+
+?>
