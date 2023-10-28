@@ -4,6 +4,14 @@ require './models/Supplier.php';
 
 $supplierObj = new Supplier();
 $suppliers = $supplierObj->all();
+
+$idedit = $_REQUEST ['idedit'];
+$obj_supplier = new Supplier();
+if (!empty($idedit)){
+  $supplier = $obj_supplier->find($idedit);
+} else {
+  $supplier = array();
+}
 ?>
 
 <!doctype html>
@@ -65,27 +73,34 @@ $suppliers = $supplierObj->all();
                 <form action="./suppliers_controller.php" method="POST">
                   <div class="form-group">
                     <label for="nama_supplier" class="form-control-label">Nama Suppliers</label>
-                    <input type="text" name="nama_supplier" id="nama_supplier" placeholder="masukkan nama supplier" class="form-control" required />
-                  </div>
+                    <input type="text" name="nama_supplier" id="nama_supplier" placeholder="masukkan nama supplier" class="form-control" value="<?= $supplier['nama_supplier'] ?>" >                  </div>
 
                   <div class="form-group">
                     <label for="email" class="form-control-label">Email</label>
-                    <input type="text" name="email" id="email" placeholder="masukkan email" class="form-control" required />
+                    <input type="text" name="email" id="email" placeholder="masukkan email" class="form-control" value="<?= $supplier['email'] ?> " >
                   </div>
 
                   <div class="form-group">
                     <label for="alamat" class="form-control-label">Alamat</label>
-                    <input type="text" name="alamat" id="alamat" placeholder="masukkan alamat" class="form-control" required />
+                    <input type="text" name="alamat" id="alamat" placeholder="masukkan alamat" class="form-control" value="<?= $supplier['alamat'] ?> " >
                   </div>
 
                   <div class="form-group">
                     <label for="contact_number" class="form-control-label">No Telepon</label>
-                    <input type="text" name="contact_number" id="contact_number" placeholder="masukkan no telepon" class="form-control" required />
+                    <input type="text" name="contact_number" id="contact_number" placeholder="masukkan no telepon" class="form-control" value="<?= $supplier['contact_number'] ?>" >
                   </div>
 
-                  <button name="proses" value="simpan" type="submit" class="btn btn-primary">
+                  <?php
+                  if(empty($idedit)){ ?>
+                    <button name="proses" value="simpan" type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i>&nbsp; Simpan
                   </button>
+                  <?php } else {
+                      ?>
+                 <button type="submit" name="proses" value="ubah" class="btn btn-warning">Ubah</button>
+                    <?php } ?>
+                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
+
                 </form>
               </div>
 
