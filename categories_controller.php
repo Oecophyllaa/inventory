@@ -14,6 +14,10 @@ switch ($tombol) {
   case 'simpan':
     $model->store($data);
     break;
+  case 'ubah' : 
+    $data[] = $_POST['idx'];
+     $model->ubah($data); 
+     break;
 
   default:
     header('Location:categories.php');

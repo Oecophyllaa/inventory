@@ -4,6 +4,14 @@ require './models/Category.php';
 
 $categoriesObj = new Categories();
 $categories = $categoriesObj->all();
+
+$idedit = $_REQUEST ['idedit'];
+$obj_categories = new Categories();
+if (!empty($idedit)){
+  $categorie = $obj_categories->find($idedit);
+} else {
+  $categorie = array();
+}
 ?>
 
 <!doctype html>
@@ -72,10 +80,18 @@ $categories = $categoriesObj->all();
                         <label for="slug" class="form-control-label">Slug</label>
                          <input type="text" name="slug" id="slug" placeholder="Masukan Slug"  class="form-control" required />
                     </div>
-                    
-                  <button name="proses" value="simpan" type="submit" class="btn btn-primary">
+                  
+                    <?php
+                  if(empty($idedit)){ ?>
+                    <button name="proses" value="simpan" type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i>&nbsp; Simpan
                   </button>
+                  <?php } else {
+                      ?>
+                 <button type="submit" name="proses" value="ubah" class="btn btn-warning">Ubah</button>
+                    <?php } ?>
+                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
+
                 </form>
               </div>
 
