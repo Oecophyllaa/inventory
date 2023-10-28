@@ -18,6 +18,15 @@ class Products
 
     return $res;
   }
+  public function getProduct($id){
+    $sql = "SELECT p.*, c.name AS category FROM products p INNER JOIN categories c ON p.category_id = c.id
+    WHERE p.id = ?";
+    //menggunakan mekanisme prepare statement PDO
+    $ps = $this->conn->prepare($sql);
+    $ps->execute([$id]);
+    $rs = $ps->fetch();
+    return $rs;
+}
   public function detail($id){
     $sql = "SELECT p.*, c.name AS category FROM products p INNER JOIN categories c ON p.category_id = c.id
     WHERE p.id = ?";
@@ -33,4 +42,14 @@ class Products
     $ps->execute($data);
   
   }
+  public function ubah($data){
+    $sql = "UPDATE products SET code=?, name=?, stok= ?, category_id=? WHERE id=?";
+     $ps = $this->conn->prepare($sql);
+     $ps->execute($data);
+ }
+ public function hapus($data){
+    $sql = "DELETE FROM products WHERE id=?";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+ }
 }
