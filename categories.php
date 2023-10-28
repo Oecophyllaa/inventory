@@ -58,8 +58,12 @@ $reports = $model->all();
       <div class="animated fadeIn">
         <div class="row">
 
-          <div class="col-md-12">
-            <div class="card">
+        <div class="col-md-12">
+            <a href="./categories_create.php" class="btn btn-primary">
+              <i class="fa fa-plus"></i>&nbsp; Tambah Data
+            </a>
+
+            <div class="card mt-3">
               <div class="card-header">
                 <strong class="card-title">Data Table</strong>
               </div>
@@ -68,8 +72,9 @@ $reports = $model->all();
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Nama</th>
+                      <th>Nama Kategori</th>
                       <th>Slug</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
 
@@ -80,6 +85,15 @@ $reports = $model->all();
                         <td><?= $no++; ?></td>
                         <td><?= $report['name']; ?></td>
                         <td><?= $report['slug']; ?></td>
+                        <td>
+                        <form action="categories_controller.php" method="POST">
+                            <a href="./categories_show.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
+                            
+                            <a href="./categories_create.php?id=<?= $report['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
+                        </form>
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>

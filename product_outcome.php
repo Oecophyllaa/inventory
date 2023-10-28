@@ -59,7 +59,11 @@ $datakeluar = $model->dataoutcome();
         <div class="row">
 
           <div class="col-md-12">
-            <div class="card">
+            <a href="./product_outform.php" class="btn btn-primary">
+              <i class="fa fa-plus"></i>&nbsp; Tambah Data
+            </a>
+
+            <div class="card mt-2">
               <div class="card-header">
                 <strong class="card-title">Data Table</strong>
               </div>
@@ -76,6 +80,8 @@ $datakeluar = $model->dataoutcome();
                       <th>nama_produk</th>
                       <th>Username</th>
                       <th>Nama Petugas</th>
+                      <th>Aksi</th>
+                      
                     </tr>
                   </thead>
 
@@ -92,6 +98,21 @@ $datakeluar = $model->dataoutcome();
                         <td><?= $out['nama_produk']; ?></td>
                         <td><?= $out['username']; ?></td>
                         <td><?= $out['nama_petugas']; ?></td>
+                        <td>
+                        <form action="product_outcome_controller.php" method="POST">
+                          <a href="./product_outdetail.php?id=<?= $out['id']; ?>" class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                          <a href="./product_outform.php?&idedit=<?= $out['id']?>" class="btn btn-warning btn-sm mt-2 ">
+                          <i class="fa fa-pencil"></i>
+                          </a>
+                          <button type="submit" class="btn btn-danger mt-2 btn-sm fa fa-trash-o" name="proses" value="hapus" 
+                              onclick="return confirm('Apakah Anda yakin untuk menghapus !!')" ></button>
+                              <input type="hidden" name="idx" value="<?= $out ['id']?> ">
+
+
+                          </form>
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>

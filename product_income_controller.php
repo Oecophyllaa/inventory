@@ -20,6 +20,17 @@ switch ($tombol) {
     $model->store($data);
     break;
 
+  case 'update':
+    $data[] = $_POST['id'];
+    $model->update($data);
+    break;
+
+  case 'delete':
+    unset($data);
+    $data[] = $_POST['id'];
+    $model->destroy($data);
+    break;
+
   default:
     header('Location:product_income.php');
     break;

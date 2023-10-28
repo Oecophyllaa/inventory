@@ -1,6 +1,7 @@
 <?php
+error_reporting(0);
 require './env.php';
-require './models/ProductIncome.php';
+require './models/ProductOutcome.php';
 require './models/Product.php';
 require './models/Supplier.php';
 require './models/User.php';
@@ -11,6 +12,13 @@ $userObj = new User();
 $products = $productObj->all();
 $suppliers = $supplierObj->all();
 $users = $userObj->all();
+$idedit = $_REQUEST ['idedit'];
+$obj_out = new product_outcome();
+if (!empty($idedit)){
+  $out = $obj_out->get($idedit);
+} else {
+  $out = array();
+}
 ?>
 
 <!doctype html>
@@ -22,7 +30,7 @@ $users = $userObj->all();
   <meta name="description" content="Sufee Admin - HTML5 Admin Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Produk Masuk | Admin</title>
+  <title>Produk Keluar | Admin</title>
 
   <!-- styles -->
   <?php include './includes/style.php'; ?>
@@ -45,7 +53,7 @@ $users = $userObj->all();
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Tambah Data Produk Masuk</h1>
+            <h1>Data Produk Keluar</h1>
           </div>
         </div>
       </div>
@@ -55,7 +63,7 @@ $users = $userObj->all();
           <div class="page-title">
             <ol class="breadcrumb text-right">
               <li><a href="./index.php">Dashboard</a></li>
-              <li class="active">Produk Masuk</li>
+              <li class="active">Produk Keluar</li>
             </ol>
           </div>
         </div>
@@ -69,55 +77,49 @@ $users = $userObj->all();
           <div class="col-12">
             <div class="card">
               <div class="card-body card-block">
-                <form action="./product_income_controller.php" method="POST">
+                <form action="./product_outcome_controller.php" method="POST">
                   <div class="form-group">
-                    <label for="date" class="form-control-label">Tangal Masuk</label>
-                    <input type="date" name="date" id="date" placeholder="masukkan tanggal masuk produk" class="form-control" required />
+                    <label for="date" class="form-control-label">Tangal Keluar</label>
+                    <input type="date" name="date" id="date" placeholder="masukkan tanggal masuk produk" class="form-control" value="<?= $out['date'] ?>" >
                   </div>
 
                   <div class="form-group">
                     <label for="invoice_number" class="form-control-label">No Invoice</label>
-                    <input type="text" name="invoice_number" id="invoice_number" placeholder="masukkan no invoice masuk" class="form-control" required />
+                    <input type="text" name="invoice_number" id="invoice_number" placeholder="masukkan no invoice masuk" class="form-control"  value="<?= $out['invoice_number'] ?>" >
                   </div>
 
                   <div class="form-group">
                     <label for="product_id" class="form-control-label">Nama Produk</label>
-                    <select name="product_id" id="product_id" class="form-control">
+                    <select name="product_id" id="product_id" class="form-control" value="<?= $out['product_id'] ?>">
                       <option>Pilih Produk</option>
-                      <?php foreach ($products as $product) : ?>
-                        <option value="<?= $product['id']; ?>"><?= $product['name']; ?></option>
-                      <?php endforeach; ?>
+                      <?php foreach ($products as $product){ 
+                        $sel = ($product['id'] == $product['product_id']) ? 'selected' : '';
+                        ?>
+                        <option value="<?= $product['id']; ?>"><?= $sel; ?><?=$product['name']; ?></option>
+                      <?php  } ?>
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label for="supplier_id" class="form-control-label">Nama Supplier</label>
-                    <select name="supplier_id" id="supplier_id" class="form-control" required>
-                      <option>Pilih Supplier</option>
-                      <?php foreach ($suppliers as $supplier) : ?>
-                        <option value="<?= $supplier['id']; ?>"><?= $supplier['name']; ?></option>
-                      <?php endforeach; ?>
-                    </select>
+                    <label for="qty" class="form-control-label">Jumlah Produk Keluar</label>
+                    <input type="number" min="0" name="qty" id="qty" placeholder="masukkan jumlah produk yang keluar" class="form-control"  value="<?= $out['qty'] ?>">
                   </div>
 
                   <div class="form-group">
-                    <label for="qty" class="form-control-label">Jumlah Produk Masuk</label>
-                    <input type="number" min="0" name="qty" id="qty" placeholder="masukkan jumlah produk yang masuk" class="form-control" required />
+                    <label for="officer_id" class="form-control-label">Officer id</label>
+                    <input type="text" name="officer_id" id="officer_id" placeholder="masukkan officer id" class="form-control"  value="<?= $out['officer_id'] ?>">
                   </div>
 
-                  <div class="form-group">
-                    <label for="user_id" class="form-control-label">Nama Petugas</label>
-                    <select name="user_id" id="user_id" class="form-control" required>
-                      <option>Pilih Petugas</option>
-                      <?php foreach ($users as $user) : ?>
-                        <option value="<?= $user['id']; ?>"><?= $user['name']; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-
-                  <button name="proses" value="simpan" type="submit" class="btn btn-primary">
+                  <?php
+                  if(empty($idedit)){ ?>
+                    <button name="proses" value="simpan" type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i>&nbsp; Simpan
                   </button>
+                  <?php } else {
+                      ?>
+                 <button type="submit" name="proses" value="ubah" class="btn btn-warning fa fa-pencil"> Ubah</button>
+                    <?php } ?>
+                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
                 </form>
               </div>
 

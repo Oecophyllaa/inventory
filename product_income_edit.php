@@ -5,9 +5,12 @@ require './models/Product.php';
 require './models/Supplier.php';
 require './models/User.php';
 
+$incomeObj = new ProductIncome();
 $productObj = new Products();
 $supplierObj = new Supplier();
 $userObj = new User();
+
+$income = $incomeObj->find($_GET['id']);
 $products = $productObj->all();
 $suppliers = $supplierObj->all();
 $users = $userObj->all();
@@ -45,7 +48,7 @@ $users = $userObj->all();
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Tambah Data Produk Masuk</h1>
+            <h1>Edit Data Produk Masuk</h1>
           </div>
         </div>
       </div>
@@ -70,14 +73,18 @@ $users = $userObj->all();
             <div class="card">
               <div class="card-body card-block">
                 <form action="./product_income_controller.php" method="POST">
+                  <!-- hidden inputs -->
+                  <input type="hidden" name="id" value="<?= $income['id']; ?>" />
+
+                  <!-- visible inputs -->
                   <div class="form-group">
                     <label for="date" class="form-control-label">Tangal Masuk</label>
-                    <input type="date" name="date" id="date" placeholder="masukkan tanggal masuk produk" class="form-control" required />
+                    <input type="date" name="date" id="date" value="<?= $income['date']; ?>" class="form-control" required />
                   </div>
 
                   <div class="form-group">
                     <label for="invoice_number" class="form-control-label">No Invoice</label>
-                    <input type="text" name="invoice_number" id="invoice_number" placeholder="masukkan no invoice masuk" class="form-control" required />
+                    <input type="text" name="invoice_number" id="invoice_number" value="<?= $income['invoice_number']; ?>" class="form-control" required />
                   </div>
 
                   <div class="form-group">
@@ -85,7 +92,9 @@ $users = $userObj->all();
                     <select name="product_id" id="product_id" class="form-control">
                       <option>Pilih Produk</option>
                       <?php foreach ($products as $product) : ?>
-                        <option value="<?= $product['id']; ?>"><?= $product['name']; ?></option>
+                        <option value="<?= $product['id']; ?>" <?= $product['id'] == $income['product_id'] ? 'selected' : ''; ?>>
+                          <?= $product['name']; ?>
+                        </option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -95,14 +104,16 @@ $users = $userObj->all();
                     <select name="supplier_id" id="supplier_id" class="form-control" required>
                       <option>Pilih Supplier</option>
                       <?php foreach ($suppliers as $supplier) : ?>
-                        <option value="<?= $supplier['id']; ?>"><?= $supplier['name']; ?></option>
+                        <option value="<?= $supplier['id']; ?>" <?= $supplier['id'] == $income['supplier_id'] ? 'selected' : ''; ?>>
+                          <?= $supplier['name']; ?>
+                        </option>
                       <?php endforeach; ?>
                     </select>
                   </div>
 
                   <div class="form-group">
                     <label for="qty" class="form-control-label">Jumlah Produk Masuk</label>
-                    <input type="number" min="0" name="qty" id="qty" placeholder="masukkan jumlah produk yang masuk" class="form-control" required />
+                    <input type="number" min="0" name="qty" id="qty" value="<?= $income['qty']; ?>" class="form-control" required />
                   </div>
 
                   <div class="form-group">
@@ -110,13 +121,15 @@ $users = $userObj->all();
                     <select name="user_id" id="user_id" class="form-control" required>
                       <option>Pilih Petugas</option>
                       <?php foreach ($users as $user) : ?>
-                        <option value="<?= $user['id']; ?>"><?= $user['name']; ?></option>
+                        <option value="<?= $user['id']; ?>" <?= $user['id'] == $income['officer_id'] ? 'selected' : ''; ?>>
+                          <?= $user['name']; ?>
+                        </option>
                       <?php endforeach; ?>
                     </select>
                   </div>
 
-                  <button name="proses" value="simpan" type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i>&nbsp; Simpan
+                  <button name="proses" value="update" type="submit" class="btn btn-warning">
+                    <i class="fa fa-edit"></i>&nbsp; Update
                   </button>
                 </form>
               </div>

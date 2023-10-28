@@ -36,4 +36,18 @@ class ProductIncome
     $ps = $this->conn->prepare($sql);
     $ps->execute($data);
   }
+
+  public function update($data)
+  {
+    $sql = "UPDATE product_income SET date=?, invoice_number=?, product_id=?, supplier_id=?, qty=?, officer_id=? WHERE id=? ;";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
+
+  public function destroy($data)
+  {
+    $sql = "DELETE FROM product_income WHERE id=? ;";
+    $ps = $this->conn->prepare($sql);
+    $ps->execute($data);
+  }
 }
