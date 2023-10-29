@@ -12,7 +12,12 @@
 
         <div class="user-menu dropdown-menu">
           <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-          <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+          <a class="nav-link" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit()">
+            <i class="fa fa-power-off"></i> Logout
+            <form action="./auth_controller.php" method="post" id="logout-form" style="display: none;">
+              <input type="hidden" name="proses" value="logout" />
+            </form>
+          </a>
         </div>
       </div>
     </div>
