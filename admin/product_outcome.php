@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
 include_once 'env.php';
 include_once './models/ProductOutcome.php';
 
@@ -102,15 +109,20 @@ $datakeluar = $model->dataoutcome();
                           <a href="./product_outdetail.php?id=<?= $out['id']; ?>" class="btn btn-primary btn-sm">
                             <i class="fa fa-eye"></i>
                           </a>
-                          <a href="./product_outform.php?&idedit=<?= $out['id'] ?>" class="btn btn-warning btn-sm">
-                            <i class="fa fa-pencil"></i>
-                          </a>
-                          <form action="product_outcome_controller.php" method="POST" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm " name="proses" value="hapus" onclick="return confirm('Apakah Anda yakin untuk menghapus !!')">
-                              <i class="fa fa-trash-o"></i>
-                            </button>
-                            <input type="hidden" name="idx" value="<?= $out['id'] ?> ">
-                          </form>
+
+                          <?php if ($_SESSION['user']['role'] != 'PETUGAS') : ?>
+                            <a href="./product_outform.php?&idedit=<?= $out['id'] ?>" class="btn btn-warning btn-sm">
+                              <i class="fa fa-pencil"></i>
+                            </a>
+
+                            <form action="product_outcome_controller.php" method="POST" class="d-inline">
+                              <button type="submit" class="btn btn-danger btn-sm " name="proses" value="hapus" onclick="return confirm('Apakah Anda yakin untuk menghapus !!')">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                              <input type="hidden" name="idx" value="<?= $out['id'] ?> ">
+                            </form>
+                          <?php endif; ?>
+
                         </td>
                       </tr>
                     <?php endforeach; ?>

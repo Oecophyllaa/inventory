@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
 require './env.php';
 require './models/ProductIncome.php';
 require './models/Product.php';
@@ -107,12 +114,8 @@ $users = $userObj->all();
 
                   <div class="form-group">
                     <label for="user_id" class="form-control-label">Nama Petugas</label>
-                    <select name="user_id" id="user_id" class="form-control" required>
-                      <option>Pilih Petugas</option>
-                      <?php foreach ($users as $user) : ?>
-                        <option value="<?= $user['id']; ?>"><?= $user['name']; ?></option>
-                      <?php endforeach; ?>
-                    </select>
+                    <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id']; ?>" class="form-control" readonly>
+                    <input type="text" value="<?= $_SESSION['user']['name']; ?>" class="form-control" readonly>
                   </div>
 
                   <button name="proses" value="simpan" type="submit" class="btn btn-primary">

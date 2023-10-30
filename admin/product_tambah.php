@@ -1,5 +1,12 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
 require './env.php';
 require './models/Product.php';
 require './models/Category.php';
@@ -9,11 +16,10 @@ $productObj = new Products();
 $categoryObj = new Categories();
 $products = $productObj->all();
 $categories = $categoryObj->all();
-$idedit = $_REQUEST ['idedit'];
+$idedit = $_REQUEST['idedit'];
 $obj_product = new Products();
-if (!empty($idedit)){
+if (!empty($idedit)) {
   $product = $obj_product->getProduct($idedit);
-
 } else {
   $product = array();
 }
@@ -29,7 +35,7 @@ if (!empty($idedit)){
   <meta name="description" content="Sufee Admin - HTML5 Admin Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Produk  | Admin</title>
+  <title>Produk | Admin</title>
 
   <!-- styles -->
   <?php include './includes/style.php'; ?>
@@ -77,19 +83,19 @@ if (!empty($idedit)){
             <div class="card">
               <div class="card-body card-block">
                 <form action="./product_controller.php" method="POST">
-                  
+
 
                   <div class="form-group">
                     <label for="code" class="form-control-label">Code</label>
-                    <input type="text" name="code" id="code"  class="form-control" value="<?= $product['code'] ?>"  >
+                    <input type="text" name="code" id="code" class="form-control" value="<?= $product['code'] ?>">
                   </div>
                   <div class="form-group">
                     <label for="name" class="form-control-label">Nama Produk</label>
-                    <input type="text" name="name" id="name" class="form-control" value="<?= $product['name'] ?>" >
+                    <input type="text" name="name" id="name" class="form-control" value="<?= $product['name'] ?>">
                   </div>
                   <div class="form-group">
                     <label for="stok" class="form-control-label">stok</label>
-                    <input type="text" name="stok" id="stok"  class="form-control" value="<?= $product['stok'] ?>">
+                    <input type="text" name="stok" id="stok" class="form-control" value="<?= $product['stok'] ?>">
                   </div>
 
                   <div class="form-group">
@@ -98,24 +104,24 @@ if (!empty($idedit)){
                       <option>Pilih Produk</option>
                       <?php foreach ($categories as $category) {
                         $sel = ($category['id'] == $product['category_id']) ? 'selected' : '';
-                         ?>
-                        <option value="<?= $category['id']; ?>"<?= $sel; ?>><?= $category['name']; ?></option>
-                        
-      
+                      ?>
+                        <option value="<?= $category['id']; ?>" <?= $sel; ?>><?= $category['name']; ?></option>
+
+
                       <?php } ?>
                     </select>
                   </div>
                   <?php
-                  if(empty($idedit)){ ?>
+                  if (empty($idedit)) { ?>
                     <button name="proses" value="simpan" type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i>&nbsp; Simpan
-                  </button>
+                      <i class="fa fa-save"></i>&nbsp; Simpan
+                    </button>
                   <?php } else {
-                      ?>
-                 <button type="submit" name="proses" value="ubah" class="btn btn-warning">ubah</button>
-                    <?php } ?>
-                 <input type="hidden" name="idx" value="<?= $idedit; ?>">
-                  
+                  ?>
+                    <button type="submit" name="proses" value="ubah" class="btn btn-warning">ubah</button>
+                  <?php } ?>
+                  <input type="hidden" name="idx" value="<?= $idedit; ?>">
+
                 </form>
               </div>
 

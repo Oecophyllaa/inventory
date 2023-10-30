@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
+if ($_SESSION['user']['role'] == 'PETUGAS') {
+  header('Location:index.php');
+  exit;
+}
+
 require './env.php';
 require './models/Supplier.php';
 

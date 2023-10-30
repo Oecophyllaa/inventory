@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
+if ($_SESSION['user']['role'] == 'PETUGAS') {
+  header('Location:index.php');
+  exit;
+}
+
 require './env.php';
 require './models/Supplier.php';
 
@@ -65,7 +77,7 @@ $data = $model->find($id);
               <div class="card-body card-block">
                 <div class="form-group">
                   <label for="date" class="form-control-label">Nama Supplier</label>
-                  <input type="text"  name ="nama_supplier" id="nama_supplier" value="<?= $data['nama_supplier']; ?>" class="form-control" readonly />
+                  <input type="text" name="nama_supplier" id="nama_supplier" value="<?= $data['nama_supplier']; ?>" class="form-control" readonly />
                 </div>
 
                 <div class="form-group">
