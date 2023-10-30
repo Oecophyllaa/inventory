@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
+if ($_SESSION['user']['role'] == 'PETUGAS') {
+  header('Location:index.php');
+  exit;
+}
+
 require './env.php';
 require './models/Category.php';
 
@@ -73,20 +85,20 @@ $data = $model->find($id);
                   <input type="text" id="slug" value="<?= $data['slug']; ?>" class="form-control" readonly />
                 </div>
 
-            <a href="./categories.php" class="btn btn-primary">
-              <i class="fa fa-mail-reply"></i>&nbsp; Kembali
-            </a>
-          </div>
+                <a href="./categories.php" class="btn btn-primary">
+                  <i class="fa fa-mail-reply"></i>&nbsp; Kembali
+                </a>
+              </div>
 
-        </div>
-      </div><!-- .animated -->
+            </div>
+          </div><!-- .animated -->
 
-    </div> <!-- .content -->
-  </div>
-  <!-- Right Panel -->
+        </div> <!-- .content -->
+      </div>
+      <!-- Right Panel -->
 
-  <!-- scripts -->
-  <?php include './includes/script.php'; ?>
+      <!-- scripts -->
+      <?php include './includes/script.php'; ?>
 </body>
 
 </html>

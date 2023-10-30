@@ -15,13 +15,15 @@
           <a href="./index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
         </li>
 
-        <h3 class="menu-title">Tabel Master</h3><!-- /.menu-title -->
-        <li class="">
-          <a href="./categories.php"> <i class="menu-icon fa fa-bars"></i>Jenis Produk </a>
-        </li>
-        <li class="">
-          <a href="./suppliers.php"> <i class="menu-icon fa fa-bars"></i>Suppliers </a>
-        </li>
+        <?php if ($_SESSION['user']['role'] != 'PETUGAS') : ?>
+          <h3 class="menu-title">Tabel Master</h3><!-- /.menu-title -->
+          <li class="">
+            <a href="./categories.php"> <i class="menu-icon fa fa-bars"></i>Jenis Produk </a>
+          </li>
+          <li class="">
+            <a href="./suppliers.php"> <i class="menu-icon fa fa-bars"></i>Suppliers </a>
+          </li>
+        <?php endif ?>
 
         <h3 class="menu-title">Tabel Relasi</h3><!-- /.menu-title -->
         <li>

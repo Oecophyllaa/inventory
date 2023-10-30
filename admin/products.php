@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location:login.php');
+  exit;
+}
+
 require './env.php';
 require './models/Product.php';
 
@@ -59,7 +66,7 @@ $reports = $model->all();
         <div class="row">
 
           <div class="col-md-12">
-          <a href="./product_tambah.php" class="btn btn-primary">
+            <a href="./product_tambah.php" class="btn btn-primary">
               <i class="fa fa-plus"></i>&nbsp; Tambah Data
             </a>
             <div class="card">
@@ -89,17 +96,16 @@ $reports = $model->all();
                         <td><?= $r['stok']; ?></td>
                         <td><?= $r['category']; ?></td>
                         <td>
-                        <form action="product_controller.php" method="POST">
-                          <a href="./product_detail.php?id=<?= $r['id']; ?>" class="btn btn-primary btn-sm">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                          <a href="./product_tambah.php?idedit=<?= $r['id']?>" class="btn btn-danger btn-sm">
-                          ✍️
-                          </a>
-                          <button type="submit" class="btn btn-warning btn-sm" name="proses" value="hapus" 
-                              onclick="return confirm('anda Yakin akan menghapus')" >🗑️</button>
-                              <input type="hidden" name="idx" value="<?= $r ['id']?> ">
-                        </form>
+                          <form action="product_controller.php" method="POST">
+                            <a href="./product_detail.php?id=<?= $r['id']; ?>" class="btn btn-primary btn-sm">
+                              <i class="fa fa-eye"></i>
+                            </a>
+                            <a href="./product_tambah.php?idedit=<?= $r['id'] ?>" class="btn btn-danger btn-sm">
+                              ✍️
+                            </a>
+                            <button type="submit" class="btn btn-warning btn-sm" name="proses" value="hapus" onclick="return confirm('anda Yakin akan menghapus')">🗑️</button>
+                            <input type="hidden" name="idx" value="<?= $r['id'] ?> ">
+                          </form>
                         </td>
                       </tr>
                     <?php endforeach; ?>

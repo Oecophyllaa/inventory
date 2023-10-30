@@ -39,7 +39,7 @@ $data = $model->detail($id);
       <div class="col-sm-4">
         <div class="page-header float-left">
           <div class="page-title">
-            <h1>Detail Produk  > <strong><?= $data['id']; ?></strong></h1>
+            <h1>Detail Produk > <strong><?= $data['id']; ?></strong></h1>
           </div>
         </div>
       </div>
@@ -83,21 +83,21 @@ $data = $model->detail($id);
                   <input type="text" id="date" value="<?= $data['category']; ?>" class="form-control" readonly />
                 </div>
 
-                
-            <a href="./products.php" class="btn btn-primary">
-              <i class="fa fa-mail-reply"></i>&nbsp; Kembali
-            </a>
-          </div>
 
-        </div>
-      </div><!-- .animated -->
+                <a href="./products.php" class="btn btn-primary">
+                  <i class="fa fa-mail-reply"></i>&nbsp; Kembali
+                </a>
+              </div>
 
-    </div> <!-- .content -->
-  </div>
-  <!-- Right Panel -->
+            </div>
+          </div><!-- .animated -->
 
-  <!-- scripts -->
-  <?php include './includes/script.php'; ?>
+        </div> <!-- .content -->
+      </div>
+      <!-- Right Panel -->
+
+      <!-- scripts -->
+      <?php include './includes/script.php'; ?>
 </body>
 
 </html>
